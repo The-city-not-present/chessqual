@@ -9,7 +9,9 @@ updated or decided. Tasks listed here are not necessarily the highest priority.
 - **Decide UI or no UI.** The core is library-only today (import `chessqual` and
   call `analyze`). Decide the first user surface: a small CLI, then optionally a
   local web UI (the sibling projects use a Python backend + plain-JS frontend, no
-  Flask/Django), or a desktop wrapper.
+  Flask/Django), or a desktop wrapper. (Started: added an optional
+  `chessqual.web` backend layer — framework-free handlers + a `ROUTES` table +
+  Flask/webserve adapters + a minimal HTML page; the real frontend is still TBD.)
 - **Decide how much chess logic is self-written.** The core validates FEN
   structure only. Decide whether to pull in `python-chess` app-wide for legal
   moves/legality, or keep it optional per-processor and write our own move

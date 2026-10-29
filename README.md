@@ -62,6 +62,31 @@ print(registry.names())              # e.g. ['material', 'stockfish']
 print(assess(collection, ["material"]))
 ```
 
+## Web UI (optional, backend + minimal page)
+
+The optional web layer (`src/chessqual/web/`) serves a JSON API and a minimal
+HTML page on `localhost`. It is written framework-free: the same endpoints can
+be served by **Flask** or by your self-written **webserve** server.
+
+```bash
+pip install -r src/chessqual/web/requirements.txt   # Flask (optional)
+
+# Flask (default):
+PYTHONPATH=src python -m chessqual.web --server flask --port 5000
+
+# webserve (self-written, included as a git submodule):
+PYTHONPATH=src python -m chessqual.web --server webserve
+```
+
+Then open the printed address (e.g. http://localhost:5000/).
+
+Endpoints:
+
+- `GET /` — minimal landing page
+- `GET /api/health` — `{"status": "ok", "version": ...}`
+- `GET /api/processors` — `{"processors": [...]}`
+- `POST /api/assess` — body `{"fens": [...], "processors": [...]}` → per-position assessments
+
 ## Documentation
 
 - **Roadmap / TODOs** — [`docs/roadmap.md`](docs/roadmap.md).

@@ -21,6 +21,12 @@ src/chessqual/
     material/     #   self-written material-balance processor
     stockfish/    #   Stockfish processor (optional: python-chess + engine binary)
   analyze.py      # assess a collection with selected processors
+  web/            # OPTIONAL web layer (imports core, never vice-versa)
+    http.py       #   framework-free Request/Response
+    handlers.py   #   pure handlers (/, /api/health, /api/processors, /api/assess)
+    routes.py     #   ROUTES table (single source of truth)
+    adapters/     #   flask_app.py (Flask) + webserve_endpoints.py (self-written webserve)
+    static/       #   minimal index.html
 tests/            # mirrors src/chessqual layout (pytest)
 docs/
   roadmap.md
@@ -55,6 +61,19 @@ docs/
 
 ## Last state
 
+- Added the **`webserve` submodule** at `src/webserver_engine/webserve` (remote
+  `https://github.com/The-city-not-present/webserve.git`), plus an empty
+  `src/webserver_engine/__init__.py` so `webserver_engine` is a package. The
+  `--server webserve` path now runs out of the box; verified with an integration
+  test that our `Response` converts via `WebResponse.from_existing`.
+- Added the **optional web backend** (`src/chessqual/web/`): framework-free
+  `Request`/`Response` types, pure handlers (`/`, `/api/health`,
+  `/api/processors`, `/api/assess`), a single `ROUTES` table, and two adapters —
+  `adapters/flask_app.py` (Flask, optional dep) and
+  `adapters/webserve_endpoints.py` (self-written webserve; no import of webserve,
+  it converts our `Response` via `WebResponse.from_existing`). Run with
+  `python -m chessqual.web --server flask|webserve`. The `ROUTES` table is the
+  single source of truth so endpoints are identical under either server.
 - Added an **Apache-2.0 `LICENSE`** (verbatim, matching the sibling repos),
   updated the README license section, and marked the roadmap license item done.
 - Added the GitHub remote `git@github.com:The-city-not-present/chessqual.git`
@@ -62,14 +81,15 @@ docs/
 - Initial scaffold: `.clinerules/`, `docs/roadmap.md` + `docs/project-context.md`,
   `README.md`, `.gitignore`, `.env.example`, `requirements.txt`, `pytest.ini`,
   the `src/chessqual/` domain+processor skeleton, and a pytest suite mirroring
-  the package layout (28 tests). Core is stdlib-only and importable; `material`
-  works out of the box; `stockfish` is guarded and fails readably when
-  `python-chess` or the engine binary is absent.
+  the package layout. Core is stdlib-only and importable; `material` works out of
+  the box; `stockfish` is guarded and fails readably when `python-chess` or the
+  engine binary is absent.
 
 ## Open questions
 
 - Final project name (see `docs/roadmap.md`).
-- First user surface: CLI vs web UI vs desktop.
+- First user surface: CLI vs web UI vs desktop (web backend is now in place; the
+  actual frontend — plain HTML/JS vs Vue — is still to be chosen).
 - How much chess logic to keep self-written vs delegate to `python-chess`.
 
 ## Known gotchas

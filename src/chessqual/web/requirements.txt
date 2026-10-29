@@ -1,0 +1,4 @@
+# Optional dependencies for the web layer (see .clinerules/05-optional-dependencies.md).
+# Flask is one of the two supported servers. The self-written "webserve" server
+# has no pip dependency; it is added as a git submodule instead.
+flask>=3

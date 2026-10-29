@@ -1,0 +1,3 @@
+[submodule "src/webserver_engine/webserve"]
+	path = src/webserver_engine/webserve
+	url = https://github.com/The-city-not-present/webserve.git
