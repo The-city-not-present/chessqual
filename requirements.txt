@@ -1,0 +1,3 @@
+# App-wide requirements only (see .clinerules/05-optional-dependencies.md).
+# The core domain is stdlib-only; per-processor extras live next to each processor.
+pytest>=8

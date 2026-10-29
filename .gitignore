@@ -1,0 +1,33 @@
+# --- Python artifacts ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# --- Environment ---
+.env
+
+# --- Outputs / generated artifacts ---
+dist/
+build/
+
+# --- Test artifacts ---
+.pytest_cache/
+
+# --- Editor files ---
+.vscode/
+.idea/
+
+# --- OS junk files ---
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+._*
